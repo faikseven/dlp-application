@@ -33,7 +33,7 @@ def ExtProjOnOff(OnOff):
 #This function will play the Video on the display :0 such this function should be executed under BBB
 ######################################################################################
 def Mplayer(VideoFile):
-	os.system("export DISPLAY=:0 | mplayer -fs "+VideoFile)
+	os.system("export DISPLAY=:0 | mpv -fs "+VideoFile)
 
 ######################################################################################
 #This function will call the function with the parameter being listed in plist tuple
@@ -105,7 +105,7 @@ if sys.platform == 'win32':
 	# This function will prompt the user and read any input within time defined by t 
 	######################################################################################
 	def raw_input_with_timeout(prompt,t,ch):
-		print "--->"+prompt   
+		print("--->"+prompt)   
 		finishat = time.time() + t 
 		result = []
 		while True:
@@ -130,7 +130,7 @@ else:
 		signal.signal(signal.SIGALRM, alarmHandler)
 		signal.alarm(timeout)
 		try:
-			result = raw_input(prompt)
+			result = input(prompt)
 			signal.alarm(0)
 			return result
 		except AlarmException:
@@ -153,7 +153,7 @@ class Prompt():
 			if skip==1:
 				reply = str(raw_input_with_timeout(question+' (Stop/Continue): ',1,'c')).lower().strip() 
 			else:
-				reply = str(raw_input(question+' (Stop/Continue): ')).lower().strip() 
+				reply = str(input(question+' (Stop/Continue): ')).lower().strip() 
 			if reply=='':
 				self.return_code=''
 			elif reply[0] == 's': 
@@ -176,7 +176,7 @@ class Query():
 			if skip==1:
 				reply = str(raw_input_with_timeout(question+' (Pass/Fail/Stop) and comment: ',1,'p')).lower().strip() 
 			else:
-				reply = str(raw_input(question+' (Pass/Fail/Stop) and comment: ')).lower().strip() 
+				reply = str(input(question+' (Pass/Fail/Stop) and comment: ')).lower().strip() 
 			self.comment = '' if (reply.find(' ')==-1) else reply[reply.find(' '):]
 			if reply=='':
 				self.return_code=''
@@ -201,7 +201,7 @@ class AskYesNo():
 			if skip==1:
 				reply = str(raw_input_with_timeout(question+' (Pass/Fail/Stop): ',1,'y')).lower().strip() 
 			else:
-				reply = str(raw_input(question+' (Yes/No/Stop): ')).lower().strip() 
+				reply = str(input(question+' (Yes/No/Stop): ')).lower().strip() 
 			if reply=='':
 				self.return_code=''
 			elif reply[0] == 'n': 
